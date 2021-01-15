@@ -8,6 +8,7 @@ import PhoneIphoneOutlinedIcon from '@material-ui/icons/PhoneIphoneOutlined';
 import DescriptionOutlinedIcon from '@material-ui/icons/DescriptionOutlined';
 import PersonOutlineOutlinedIcon from '@material-ui/icons/PersonOutlineOutlined';
 import SettingsOutlinedIcon from '@material-ui/icons/SettingsOutlined';
+import clsx from 'clsx';
 
 const Sidebar = ({ sidebarInfo }) => {
   const classes = useStyles({
@@ -18,12 +19,14 @@ const Sidebar = ({ sidebarInfo }) => {
     id: 0,
     text: 'DASHBOARD',
     icon: <AvTimerOutlinedIcon color='secondary'/>,
-    path: '#'
+    path: '#',
+    active: true,
   },{
     id: 1,
     text: 'ASSETS',
     icon: <TableChartOutlinedIcon color='secondary'/>,
     path: '#',
+    active: false,
     subItems: [{
       id: 2,
       text: 'Non-Consumable Assets'
@@ -40,6 +43,7 @@ const Sidebar = ({ sidebarInfo }) => {
     text: 'VEHICLES',
     icon: <DriveEtaOutlinedIcon color='secondary'/>,
     path: '#',
+    active: false,
     subItems: [{
       id: 10,
       text: 'Test Multiple Nested'
@@ -50,26 +54,37 @@ const Sidebar = ({ sidebarInfo }) => {
     text: 'PHONE CREDIT',
     icon: <PhoneIphoneOutlinedIcon color='secondary'/>,
     path: '#',
+    active: false,
   },{
     id: 7,
     text: 'REPORT',
     icon: <DescriptionOutlinedIcon color='secondary'/>,
     path: '#',
+    active: false,
   },{
     id: 8,
     text: 'PEOPLE',
     icon: <PersonOutlineOutlinedIcon color='secondary'/>,
     path: '#',
+    active: false,
   },{
     id: 9,
     text: 'SETTINGS',
     icon: <SettingsOutlinedIcon color='secondary'/>,
     path: '#',
+    active: false,
   }])
 
   const onToggleSubMenu = (id) => {
     const clickedItem = sidebarItems.find(item => item.id === id);
     clickedItem.toggleSubMenu = clickedItem.toggleSubMenu ? false : true
+    setSidebarItems([...sidebarItems])
+  }
+
+  const toggleActiveClass = (id) => {
+    sidebarItems.map((item, index) => {
+      item.id === id ? (item.active = true) : (item.active = false) 
+    })
     setSidebarItems([...sidebarItems])
   }
 
@@ -97,10 +112,16 @@ const Sidebar = ({ sidebarInfo }) => {
         </div>
         <List>
           {sidebarItems.map((item, index) => (
-            <div key={`${item.id}${item.text}`}>
+            <div  key={`${item.id}${item.text}`} 
+                  className={clsx(classes.listItemWrapper, {
+                    [classes.activeListItem] : item.active
+                  })}>
               <ListItem button 
                         key={`${item.id}${item.text}`} 
-                        onClick={item.subItems ? () => onToggleSubMenu(item.id) : null}>
+                        onClick={() => {
+                          toggleActiveClass(item.id)
+                          item.subItems && onToggleSubMenu(item.id)
+                        }}>
                 <ListItemIcon>
                   {item.icon}
                 </ListItemIcon>
@@ -162,6 +183,16 @@ const useStyles = makeStyles((theme) => ({
     color: theme.palette.typography.secondary,
     fontSize: theme.typography.pxToRem(14),
   },
+  listItemWrapper: {
+    borderLeft: `2px solid transparent`,
+    transition: theme.transitions.create('borderColor', {
+      easing: theme.transitions.easing.easeOut,
+      duration: theme.transitions.duration.enteringScreen,
+    }),
+  },
+  activeListItem: {
+    borderColor: theme.palette.primary.main
+  }
 }));
 
 export default Sidebar;
