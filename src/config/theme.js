@@ -27,6 +27,14 @@ let theme = createMuiTheme({
     },
     error: {
       main: "#FE4D5C",
+    },
+    typography: {
+      primary: '#252631',
+      secondary: '#778CA2',
+      success: '#21A21E',
+      warning: '#C1931B',
+      info: '#214DC7',
+      error: '#C11B1B',
     }
   },
   typography: {
