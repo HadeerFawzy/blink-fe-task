@@ -1,13 +1,15 @@
 import React from 'react';
-import { ThemeProvider, makeStyles, CssBaseline } from "@material-ui/core";
+import { ThemeProvider, makeStyles } from "@material-ui/core";
 import clsx from 'clsx';
-import theme from "./config/theme";
-import Layout from './components/Layout';
+import theme from "config/theme";
+import Layout from 'components/Layout';
+import Content from 'components/Content';
 
 const App = () => {
   
   const sidebarWidth = 240;
-  const [toggleSidebar, setToggleSidebar] = React.useState(false);
+  const [toggleSidebar, setToggleSidebar] = React.useState(true);
+
   const onToggleSidebar = () => {
     setToggleSidebar(toggleSidebar ? false : true);
   };
@@ -24,13 +26,12 @@ const App = () => {
   return (
     <ThemeProvider theme={theme}>
       <div className={classes.appRoot}>
-        <CssBaseline />
         <Layout sidebarInfo={sidebarInfo}/>
         <div className={clsx(classes.content, {
                 [classes.contentShift]: sidebarInfo.toggle,
               })}> 
           <div className={classes.sidebarHeader} />
-                Content Goes here
+          <Content/>
         </div>
       </div>
     </ThemeProvider>
@@ -40,6 +41,7 @@ const App = () => {
 const useStyles = makeStyles((theme) => ({
   appRoot: {
     display: 'flex',
+    backgroundColor: theme.palette.primary.lightt
   },
   content: {
     flexGrow: 1,

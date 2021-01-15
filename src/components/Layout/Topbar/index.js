@@ -59,7 +59,8 @@ const Topbar = ({ sidebarInfo }) => {
 
   return (
     <div className={classes.grow}>
-      <AppBar position="fixed" color='transparent' 
+      <AppBar position="fixed" 
+              color='transparent' 
               className={clsx(classes.appBar, {
                 [classes.appBarShift]: sidebarInfo.toggle,
               })} >
@@ -130,6 +131,7 @@ const useStyles = makeStyles((theme) => ({
       easing: theme.transitions.easing.sharp,
       duration: theme.transitions.duration.leavingScreen,
     }),
+    backgroundColor: theme.palette.common.white
   },
   appBarShift: {
     width: `100%`,

@@ -15,6 +15,7 @@ let theme = createMuiTheme({
   },
   palette: {
     primary: {
+      lightt: '#F8FAFB',
       main: "#4D7CFE",
       dark: "#3159C8",
     },
@@ -39,8 +40,12 @@ let theme = createMuiTheme({
     }
   },
   typography: {
-    fontFamily: "'Rubik', Roboto",
+    fontFamily: "'Rubik', sans-serif",
     fontFamilySecondary: "'Roboto Slab', serif",
+    body1: {
+      fontFamily: "'Rubik', sans-serif",
+      fontSize: "1rem",
+    },
   },
   props: {
     MuiLink: {
