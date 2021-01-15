@@ -1,7 +1,10 @@
-function App() {
+import React from 'react';
+import Layout from './components/Layout';
+
+const App = () => {
   return (
-    <div className="App">
-      test
+    <div>
+      <Layout/>
     </div>
   );
 }
