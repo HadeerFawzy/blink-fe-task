@@ -32,7 +32,7 @@ const FuelInfo = ( ) => {
           display='flex' 
           alignItems="center"
           justifyContent='space-between'
-          my={2}>
+          my={3}>
       { fuelInfo.map((info, index) => (
           <Box key={info.id} className={classes.infoBox}>
             <Typography className={classes.infoValue}>

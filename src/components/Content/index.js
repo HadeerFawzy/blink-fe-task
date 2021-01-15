@@ -1,5 +1,6 @@
 import React from 'react';
-import { makeStyles, Typography } from '@material-ui/core';
+import { makeStyles, Typography, Divider } from '@material-ui/core';
+import Filters from 'components/Content/Filters'
 import FuelInfo from 'components/Content/FuelInfo'
 
 const Content = () => {
@@ -10,6 +11,8 @@ const Content = () => {
       <Typography className={classes.contentTitle}>
         Fuel History
       </Typography>
+      <Filters/>
+      <Divider />
       <FuelInfo/>
     </div>
   );

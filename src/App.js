@@ -41,7 +41,8 @@ const App = () => {
 const useStyles = makeStyles((theme) => ({
   appRoot: {
     display: 'flex',
-    backgroundColor: theme.palette.primary.lightt
+    backgroundColor: '#F8FAFB'
+    // backgroundColor: theme.palette.primary.light
   },
   content: {
     flexGrow: 1,
