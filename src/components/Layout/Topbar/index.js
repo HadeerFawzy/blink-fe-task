@@ -5,9 +5,12 @@ import SearchIcon from '@material-ui/icons/Search';
 import NotificationsIcon from '@material-ui/icons/Notifications';
 import ExitToAppIcon from '@material-ui/icons/ExitToApp';
 import PersonOutlineIcon from '@material-ui/icons/PersonOutline';
+import clsx from 'clsx';
 
-const Topbar = () => {
-  const classes = useStyles();
+const Topbar = ({ sidebarInfo }) => {
+  const classes = useStyles({
+    sidebarWidth: sidebarInfo.width
+  });
 
   const [anchorEl, setAnchorEl] = React.useState(null);
 
@@ -56,13 +59,17 @@ const Topbar = () => {
 
   return (
     <div className={classes.grow}>
-      <AppBar position="static" color='transparent'>
+      <AppBar position="fixed" color='transparent' 
+              className={clsx(classes.appBar, {
+                [classes.appBarShift]: sidebarInfo.toggle,
+              })} >
         <Toolbar>
           <IconButton
             edge="start"
             className={classes.menuButton}
             color="secondary"
             aria-label="open drawer"
+            onClick={sidebarInfo.onToggleSidebar}
           >
             <MenuIcon />
           </IconButton>
@@ -118,6 +125,23 @@ const useStyles = makeStyles((theme) => ({
   menuButton: {
     marginRight: theme.spacing(2),
   },
+  appBar: {
+    transition: theme.transitions.create(['margin', 'width'], {
+      easing: theme.transitions.easing.sharp,
+      duration: theme.transitions.duration.leavingScreen,
+    }),
+  },
+  appBarShift: {
+    width: `100%`,
+    marginLeft: (props) => props.sidebarWidth,
+    transition: theme.transitions.create(['margin', 'width'], {
+      easing: theme.transitions.easing.easeOut,
+      duration: theme.transitions.duration.enteringScreen,
+    }),
+    [theme.breakpoints.up('md')]: {
+      width: (props) => `calc(100% - ${props.sidebarWidth}px)`,
+    }
+  },
   title: {
     display: 'none',
     fontSize: theme.typography.pxToRem(20),
@@ -164,9 +188,6 @@ const useStyles = makeStyles((theme) => ({
     transition: theme.transitions.create('width'),
     width: '100%',
     maxWidth: theme.spacing(7.5),
-    [theme.breakpoints.up('md')]: {
-      maxWidth: '100%',
-    },
   },
   userImg: {
     width: theme.spacing(4.5),
