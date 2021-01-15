@@ -1,7 +1,7 @@
 import React from 'react';
 import { makeStyles } from '@material-ui/core';
-import Sidebar from './Sidebar';
-import Topbar from './Topbar';
+import Sidebar from 'components/Layout/Sidebar';
+import Topbar from 'components/Layout/Topbar';
 
 const Layout = ({ sidebarInfo }) => {
   const classes = useStyles();
