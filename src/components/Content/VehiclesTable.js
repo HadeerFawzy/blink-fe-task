@@ -27,30 +27,30 @@ const VehiclesTable = ({ vehicles, setVehicles, filteredVehicles, editVehicle })
     },
     { id: 'time', 
       label: 'Time', 
-      minWidth: 100 
+      minWidth: 50 
     },
     {
       id: 'km',
       label: 'Total km',
-      minWidth: 170,
+      minWidth: 50,
       align: 'right',
     },
     {
       id: 'volume',
       label: 'Volume',
-      minWidth: 170,
+      minWidth: 50,
       align: 'right',
     },
     {
       id: 'cost',
       label: 'Cost',
-      minWidth: 170,
+      minWidth: 50,
       align: 'right',
     },
     {
       id: 'actions',
       label: 'Actions',
-      minWidth: 170,
+      minWidth: 100,
       align: 'right',
     },
   ];
@@ -83,7 +83,7 @@ const VehiclesTable = ({ vehicles, setVehicles, filteredVehicles, editVehicle })
             <TableCell key={columns[0].id} align={columns[0].align}>
               <Box display='flex'>
                 <Avatar alt={vehicle.name}
-                        // src={`https://picsum.photos/id/${vehicle.id}/300/200`} 
+                        src={`https://picsum.photos/id/${vehicle.id}/300/200`} 
                         className={classes.vehicleImg}>
                   {vehicle.name.charAt(0)}
                 </Avatar>
