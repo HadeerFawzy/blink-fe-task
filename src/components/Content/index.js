@@ -2,6 +2,7 @@ import React from 'react';
 import { makeStyles, Typography, Divider } from '@material-ui/core';
 import Filters from 'components/Content/Filters'
 import FuelInfo from 'components/Content/FuelInfo'
+import VehiclesTable from 'components/Content/VehiclesTable'
 
 const Content = () => {
   const classes = useStyles();
@@ -11,9 +12,10 @@ const Content = () => {
       <Typography className={classes.contentTitle}>
         Fuel History
       </Typography>
-      <Filters/>
+      <Filters />
       <Divider />
-      <FuelInfo/>
+      <FuelInfo />
+      <VehiclesTable />
     </div>
   );
 }
