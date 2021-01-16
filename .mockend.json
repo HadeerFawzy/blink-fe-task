@@ -8,9 +8,9 @@
     "id": "int",
     "name": "string",
     "status": "boolean",
-    "km": "int",
-    "volume": "int",
-    "cost": "int",
+    "km": "float",
+    "volume": "float",
+    "cost": "float",
     "day": "Day"
   }
 }
