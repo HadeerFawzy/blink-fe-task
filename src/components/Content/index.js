@@ -37,7 +37,7 @@ const Content = () => {
 
   useEffect(() => {
     // the online data generator wasn't flexible enough to draw data relations so I only will generate vehicles and add some dates statically
-    fetchVehicles(`https://mockend.com/HadeerFawzy/blink-fe-task/vehicles?limit=3&name_order=asc`)
+    fetchVehicles(`https://mockend.com/HadeerFawzy/blink-fe-task/vehicles?limit=50&name_order=asc`)
   }, []);
 
 
