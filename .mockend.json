@@ -4,11 +4,10 @@
     "date": "date",
     "vehicles": [{
       "id": "int",
-      "img": "base64",
       "name": "string",
-      "status": "Active || In Shop || Out of Service",
+      "status": "string",
       "time": "time",
-      "km": "distance",
+      "km": "int",
       "volume": "float",
       "cose": [{
         "total": "float",
