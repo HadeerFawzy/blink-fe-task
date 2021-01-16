@@ -3,24 +3,23 @@ import { makeStyles, Paper, Table, TableBody, TableCell, TableContainer, TableHe
 import DeleteIcon from '@material-ui/icons/Delete';
 import CreateIcon from '@material-ui/icons/Create';
 
-const VehiclesTable = () => {
+const VehiclesTable = ({ vehicles, setVehicles }) => {
   const classes = useStyles();
   const axios = require('axios').default;
 
   const [page, setPage] = React.useState(0);
   const [rowsPerPage, setRowsPerPage] = React.useState(10);
-  const [rows, setRows] = useState([])
-  const [count, setCount] = useState(100) // this is a workd around to reduce the count when delete - I did this cause I want to request only number of rows per page no more, cause I can't slice with the date exits!!
+  const [count, setCount] = useState(100) // this is a workd around to reduce the count when delete - I did this cause I want to request only number of vehicles per page no more, cause I can't slice with the date exits!!
 
   const handleChangePage = (event, newPage) => {
     setPage(newPage);
-    setRows([])
+    setVehicles([])
     fetchVehicles(`https://mockend.com/HadeerFawzy/blink-fe-task/vehicles?limit=${rowsPerPage}`)
   };
 
   const handleChangeRowsPerPage = (event) => {
     setRowsPerPage(+event.target.value);
-    setRows([])
+    setVehicles([])
     fetchVehicles(`https://mockend.com/HadeerFawzy/blink-fe-task/vehicles?limit=${+event.target.value}`)
     setPage(0);
   };
@@ -72,7 +71,7 @@ const VehiclesTable = () => {
   const fetchVehicles = (url) => {
     axios.get(url)
     .then(function (response) {
-      setRows([...response.data])
+      setVehicles([...response.data])
     })
     .catch(function (error) {
       console.log(error);
@@ -83,8 +82,8 @@ const VehiclesTable = () => {
   }
 
   const deleteVehicle = (vehicle) => {
-    const filteredRows = rows.filter((row, index) => row.id !== vehicle.id  )
-    setRows([...filteredRows])
+    const filteredRows = vehicles.filter((row, index) => row.id !== vehicle.id  )
+    setVehicles([...filteredRows])
     setCount(count - 1)
   }
 
@@ -94,8 +93,8 @@ const VehiclesTable = () => {
   }, []);
 
   // useEffect(() => {
-  //   console.log(rows)
-  // }, [rows]);
+  //   console.log(vehicles)
+  // }, [vehicles]);
 
   const drawVehicleRow = (vehicle, date) => {
     const vehicleDate = vehiclesDates[Math.floor(Math.random() * vehiclesDates.length)]
@@ -177,14 +176,14 @@ const VehiclesTable = () => {
               ))}
             </TableRow>
           </TableHead>
-            { rows.length > 0 ? 
+            { vehicles.length > 0 ? 
                 <TableBody>
                   {vehiclesDates.map((date, index) => (
                     <React.Fragment key={date.id}>
                         <TableRow className={classes.vDate} key={date.id}>
                           <TableCell colSpan={6}>{date}</TableCell>
                         </TableRow>
-                        { rows.map((row, index) =>  drawVehicleRow(row, date) )}
+                        { vehicles.map((row, index) =>  drawVehicleRow(row, date) )}
                     </React.Fragment>
                   ))}
                 </TableBody>
@@ -195,7 +194,7 @@ const VehiclesTable = () => {
                   </TableCell>
                 </TableRow>
             }
-            {/* {rows.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage).map((mainRow) => {
+            {/* {vehicles.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage).map((mainRow) => {
               
             })} */}
         </Table>
