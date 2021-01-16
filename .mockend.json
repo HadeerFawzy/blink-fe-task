@@ -1,13 +1,16 @@
 {
-  "Post": {
-    "title": "string",
-    "views": "int",
-    "published": "boolean",
-    "createdAt": "date",
-    "comments": "Comment[]"
+  "Day": {
+    "id": "int",
+    "value": "date",
+    "vehicles": "Vehicle[]"
   },
-  "Comment": {
-    "body": "string",
-    "post": "Post"
+  "Vehicle": {
+    "id": "int",
+    "name": "string",
+    "status": "boolean",
+    "km": "int",
+    "volume": "int",
+    "cost": "int",
+    "day": "Day"
   }
 }
