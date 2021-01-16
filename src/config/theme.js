@@ -30,6 +30,9 @@ let theme = createMuiTheme({
     error: {
       main: "#FE4D5C",
     },
+    warning: {
+      main: "#FFAB2B"
+    },
     typography: {
       primary: '#252631',
       secondary: '#778CA2',
