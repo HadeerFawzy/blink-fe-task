@@ -2,6 +2,7 @@
   "Vehicle": {
     "id": "int",
     "name": "string",
+    "status": "boolean",
     "km": "int",
     "volume": "int",
     "cost": "int"
