@@ -1,17 +1,14 @@
 {
-  "day": {
+  "vehicles": {
     "id": "int",
+    "name": "string",
+    "status": "string",
     "day": "date",
-    "vehicles": [{
-      "id": "int",
-      "name": "string",
-      "status": "string",
-      "km": "int",
-      "volume": "int",
-      "cost":{
-        "total": "int",
-        "price_per_ltr": "int"
-      }
-    }] 
+    "km": "int",
+    "volume": "int",
+    "cost":{
+      "total": "int",
+      "price_per_ltr": "int"
+    }
   }
 }
