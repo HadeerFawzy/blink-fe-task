@@ -4,7 +4,7 @@ import { makeStyles, Button, TextField, Dialog, DialogActions, DialogContent, Di
 const EditForm = ({ open, setOpen, editedVehicle, vehicles, setVehicles }) => {
   const classes = useStyles();
   const [formData, setFormData] = useState({
-    vehicleName: 0,
+    vehicleName: '',
     odometer: 0,
     volume: 0
   })
@@ -17,7 +17,7 @@ const EditForm = ({ open, setOpen, editedVehicle, vehicles, setVehicles }) => {
   const saveData = () => {
     vehicles.filter((vehicle, index) => {
       if(vehicle.id == editedVehicle.id){
-        vehicle = {
+        vehicles[index] = {
           ...vehicle,
           name: formData.vehicleName,
           km: formData.odometer,
@@ -44,10 +44,10 @@ const EditForm = ({ open, setOpen, editedVehicle, vehicles, setVehicles }) => {
               onChange={handleChange}
               label="Vehicle"
             >
-              <MenuItem value={0}>Vehicle Name 0</MenuItem>
-              <MenuItem value={10}>Vehicle Name 1</MenuItem>
-              <MenuItem value={20}>Vehicle Name 2</MenuItem>
-              <MenuItem value={30}>Vehicle Name 3</MenuItem>
+              <MenuItem value='Vehicle Name 0'>Vehicle Name 0</MenuItem>
+              <MenuItem value='Vehicle Name 1'>Vehicle Name 1</MenuItem>
+              <MenuItem value='Vehicle Name 2'>Vehicle Name 2</MenuItem>
+              <MenuItem value='Vehicle Name 3'>Vehicle Name 3</MenuItem>
             </Select>
           </FormControl>
           {/* ======== */}

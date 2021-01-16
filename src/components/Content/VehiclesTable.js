@@ -73,12 +73,10 @@ const VehiclesTable = ({ vehicles, setVehicles, filteredVehicles, editVehicle })
   //   console.log(vehicles)
   // }, [vehicles]);
 
-  const drawVehicleRow = (vehicle, date) => {
-    console.log(vehicle, date)
-    // const vehicleDate = vehiclesDates[Math.floor(Math.random() * vehiclesDates.length)]
+  const drawVehicleRow = (vehicle) => {
     return (
       <>
-        {vehicle.date === date &&
+        {/* {vehicle.date === date && */}
           <TableRow key={vehicle.id}>
             <TableCell key={columns[0].id} align={columns[0].align}>
               <Box display='flex'>
@@ -123,7 +121,7 @@ const VehiclesTable = ({ vehicles, setVehicles, filteredVehicles, editVehicle })
               </IconButton>
             </TableCell>
           </TableRow>
-        }
+        {/* } */}
       </>
     )
   }
@@ -156,19 +154,24 @@ const VehiclesTable = ({ vehicles, setVehicles, filteredVehicles, editVehicle })
           </TableHead>
             { filteredVehicles.length > 0 ? 
                 <TableBody>
-                  {vehiclesDates.map((date, dateIndex) => (
+                  { filteredVehicles.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage).map((row, index) =>  {
+                            return (
+                              <> {drawVehicleRow(row)} </>
+                            )
+                        })} 
+
+                  {/* {vehiclesDates.map((date, dateIndex) => (
                     <React.Fragment key={date.id}>
                         <TableRow className={classes.vDate} key={date.id}>
                           <TableCell colSpan={6}>{date}</TableCell>
                         </TableRow>
-                        { filteredVehicles.map((row, index) =>  {
-                            row.date = Math.floor(Math.random() * vehiclesDates.length)
+                        { filteredVehicles.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage).map((row, index) =>  {
                             return (
                               <> {drawVehicleRow(row, dateIndex)} </>
                             )
                         })} 
                     </React.Fragment>
-                  ))}
+                  ))} */}
                 </TableBody>
               : 
                   <TableRow>
