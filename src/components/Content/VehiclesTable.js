@@ -3,7 +3,7 @@ import { makeStyles, Paper, Table, TableBody, TableCell, TableContainer, TableHe
 import DeleteIcon from '@material-ui/icons/Delete';
 import CreateIcon from '@material-ui/icons/Create';
 
-const VehiclesTable = ({ vehicles, setVehicles }) => {
+const VehiclesTable = ({ vehicles, setVehicles, filteredVehicles }) => {
   const classes = useStyles();
   const axios = require('axios').default;
 
@@ -176,23 +176,31 @@ const VehiclesTable = ({ vehicles, setVehicles }) => {
               ))}
             </TableRow>
           </TableHead>
-            { vehicles.length > 0 ? 
+            { filteredVehicles.length > 0 ? 
                 <TableBody>
                   {vehiclesDates.map((date, index) => (
                     <React.Fragment key={date.id}>
                         <TableRow className={classes.vDate} key={date.id}>
                           <TableCell colSpan={6}>{date}</TableCell>
                         </TableRow>
-                        { vehicles.map((row, index) =>  drawVehicleRow(row, date) )}
+                        { filteredVehicles.map((row, index) =>  drawVehicleRow(row, date) )}
                     </React.Fragment>
                   ))}
                 </TableBody>
-              : 
-                <TableRow>
-                  <TableCell colSpan={6} align='center'>
-                    <img className={classes.loader} src='./assets/loader.gif'/>
-                  </TableCell>
-                </TableRow>
+              :  count.length > 0 ?
+                  <TableRow>
+                    <TableCell colSpan={6} align='center'>
+                      <img className={classes.loader} src='./assets/loader.gif'/>
+                    </TableCell>
+                  </TableRow>
+                :
+                  <TableRow>
+                    <TableCell colSpan={6} align='center'>
+                      <Typography>
+                        All Vehicles has been deleted!
+                      </Typography>
+                    </TableCell>
+                  </TableRow>
             }
             {/* {vehicles.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage).map((mainRow) => {
               
