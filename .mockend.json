@@ -1,7 +1,7 @@
 {
-  "date": {
+  "day": {
     "id": "int",
-    "date": "date",
+    "day": "date",
     "vehicles": [{
       "id": "int",
       "name": "string",
