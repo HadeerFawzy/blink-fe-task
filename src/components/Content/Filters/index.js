@@ -21,11 +21,10 @@ const Filters = ({ vehicles, setVehicles, setFilteredVehicles }) => {
   }
 
   const handleSearchChange = (e) => {
+    setSearchText(e.target.value)
     if(e.target.value == '') {
       setFilteredVehicles([...vehicles])
-    } else {
-      setSearchText(e.target.value)
-    }
+    } 
   }
 
   return (
