@@ -33,7 +33,7 @@ const Filters = () => {
 
       <Typography color='primary' className={clsx(classes.filtersNumber, classes.fontSize14)}>
         1 Filter 
-        <Box color={theme.palette.secondary.main}> &nbsp; Applied </Box>
+        <span className={classes.appliedText}> &nbsp; Applied </span>
       </Typography>
 
       <Button color="primary" className={clsx(classes.clearAll, classes.fontSize14)}>
@@ -58,8 +58,10 @@ const useStyles = makeStyles((theme) => ({
   },
   fontSize14: {
     fontSize: theme.typography.pxToRem(14)
+  },
+  appliedText: {
+    color: theme.palette.secondary.main
   }
-  
 }));
 
 export default Filters;
