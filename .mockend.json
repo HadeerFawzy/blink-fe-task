@@ -1,5 +1,5 @@
 {
-  "vehicles": {
+  "vehicle": {
     "id": "int",
     "name": "string",
     "status": "boolean",
