@@ -1,11 +1,16 @@
 {
+  "Day": {
+    "id": "int",
+    "value": "date",
+    "vehicles": "Vehicle[]"
+  },
   "Vehicle": {
     "id": "int",
     "name": "string",
     "status": "boolean",
-    "day": "date",
     "km": "int",
     "volume": "int",
-    "cost": "int"
+    "cost": "int",
+    "day": "Day"
   }
 }
