@@ -7,10 +7,10 @@
       "name": "string",
       "status": "string",
       "km": "int",
-      "volume": "float",
+      "volume": "int",
       "cost":{
-        "total": "float",
-        "price_per_ltr": "float"
+        "total": "int",
+        "price_per_ltr": "int"
       }
     }] 
   }
