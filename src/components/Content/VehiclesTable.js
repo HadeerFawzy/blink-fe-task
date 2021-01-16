@@ -2,25 +2,21 @@ import React, { useEffect, useState } from 'react';
 import { makeStyles, Paper, Table, TableBody, TableCell, TableContainer, TableHead, TablePagination, TableRow, Typography, Box, Avatar, IconButton } from '@material-ui/core';
 import DeleteIcon from '@material-ui/icons/Delete';
 import CreateIcon from '@material-ui/icons/Create';
+import EditForm from 'components/Content/EditForm'
 
-const VehiclesTable = ({ vehicles, setVehicles, filteredVehicles }) => {
+const VehiclesTable = ({ vehicles, setVehicles, filteredVehicles, editVehicle }) => {
   const classes = useStyles();
-  const axios = require('axios').default;
 
+  const [openFormModal, setOpenFormModal] = useState(false)
   const [page, setPage] = React.useState(0);
   const [rowsPerPage, setRowsPerPage] = React.useState(10);
-  const [count, setCount] = useState(100) // this is a workd around to reduce the count when delete - I did this cause I want to request only number of vehicles per page no more, cause I can't slice with the date exits!!
 
   const handleChangePage = (event, newPage) => {
-    setPage(newPage);
-    setVehicles([])
-    fetchVehicles(`https://mockend.com/HadeerFawzy/blink-fe-task/vehicles?limit=${rowsPerPage}`)
+    setPage(newPage)
   };
 
   const handleChangeRowsPerPage = (event) => {
     setRowsPerPage(+event.target.value);
-    setVehicles([])
-    fetchVehicles(`https://mockend.com/HadeerFawzy/blink-fe-task/vehicles?limit=${+event.target.value}`)
     setPage(0);
   };
 
@@ -68,39 +64,21 @@ const VehiclesTable = ({ vehicles, setVehicles, filteredVehicles }) => {
     'Mon, Jun 12, 2019',
   ]
 
-  const fetchVehicles = (url) => {
-    axios.get(url)
-    .then(function (response) {
-      setVehicles([...response.data])
-    })
-    .catch(function (error) {
-      console.log(error);
-    })
-    .then(function () {
-      // always executed
-    }); 
-  }
-
   const deleteVehicle = (vehicle) => {
     const filteredRows = vehicles.filter((row, index) => row.id !== vehicle.id  )
     setVehicles([...filteredRows])
-    setCount(count - 1)
   }
-
-  useEffect(() => {
-    // the online data generator wasn't flexible enough to draw data relations so I only will generate vehicles and add some dates statically
-    fetchVehicles(`https://mockend.com/HadeerFawzy/blink-fe-task/vehicles?limit=${rowsPerPage}`)
-  }, []);
 
   // useEffect(() => {
   //   console.log(vehicles)
   // }, [vehicles]);
 
   const drawVehicleRow = (vehicle, date) => {
-    const vehicleDate = vehiclesDates[Math.floor(Math.random() * vehiclesDates.length)]
+    console.log(vehicle, date)
+    // const vehicleDate = vehiclesDates[Math.floor(Math.random() * vehiclesDates.length)]
     return (
       <>
-        {vehicleDate == date &&
+        {vehicle.date === date &&
           <TableRow key={vehicle.id}>
             <TableCell key={columns[0].id} align={columns[0].align}>
               <Box display='flex'>
@@ -137,7 +115,7 @@ const VehiclesTable = ({ vehicles, setVehicles, filteredVehicles }) => {
               RP {vehicle.cost}
             </TableCell>
             <TableCell key={columns[5].id} align={columns[5].align}>
-              <IconButton>
+              <IconButton onClick={() => editVehicle(vehicle)}>
                 <CreateIcon className={classes.editIcon}/>
               </IconButton>
               <IconButton onClick={() => deleteVehicle(vehicle)}>
@@ -155,7 +133,7 @@ const VehiclesTable = ({ vehicles, setVehicles, filteredVehicles }) => {
       <TablePagination
         rowsPerPageOptions={[10, 25, 100]}
         component="div"
-        count={count}
+        count={filteredVehicles.length}
         rowsPerPage={rowsPerPage}
         page={page}
         onChangePage={handleChangePage}
@@ -178,35 +156,35 @@ const VehiclesTable = ({ vehicles, setVehicles, filteredVehicles }) => {
           </TableHead>
             { filteredVehicles.length > 0 ? 
                 <TableBody>
-                  {vehiclesDates.map((date, index) => (
+                  {vehiclesDates.map((date, dateIndex) => (
                     <React.Fragment key={date.id}>
                         <TableRow className={classes.vDate} key={date.id}>
                           <TableCell colSpan={6}>{date}</TableCell>
                         </TableRow>
-                        { filteredVehicles.map((row, index) =>  drawVehicleRow(row, date) )}
+                        { filteredVehicles.map((row, index) =>  {
+                            row.date = Math.floor(Math.random() * vehiclesDates.length)
+                            return (
+                              <> {drawVehicleRow(row, dateIndex)} </>
+                            )
+                        })} 
                     </React.Fragment>
                   ))}
                 </TableBody>
-              :  count.length > 0 ?
+              : 
                   <TableRow>
                     <TableCell colSpan={6} align='center'>
                       <img className={classes.loader} src='./assets/loader.gif'/>
                     </TableCell>
                   </TableRow>
-                :
-                  <TableRow>
-                    <TableCell colSpan={6} align='center'>
-                      <Typography>
-                        All Vehicles has been deleted!
-                      </Typography>
-                    </TableCell>
-                  </TableRow>
+                
             }
             {/* {vehicles.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage).map((mainRow) => {
               
             })} */}
         </Table>
       </TableContainer>
+      <EditForm open={openFormModal}
+                setOpen={setOpenFormModal}/> 
     </Paper>
   );
 }
