@@ -9,10 +9,10 @@
       "time": "time",
       "km": "int",
       "volume": "float",
-      "cose": [{
+      "cost":{
         "total": "float",
         "price_per_ltr": "float"
-      }]
+      }
     }] 
   }
 }
