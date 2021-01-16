@@ -1,13 +1,19 @@
 {
-  "Post": {
-    "title": "string",
-    "views": "int",
-    "published": "boolean",
-    "createdAt": "date",
-    "comments": "Comment[]"
-  },
-  "Comment": {
-    "body": "string",
-    "post": "Post"
+  "Date": {
+    "id": "int",
+    "date": "date",
+    "vehicles": [{
+      "id": "int",
+      "img": "base64",
+      "name": "string",
+      "status": "Active || In Shop || Out of Service",
+      "time": "time",
+      "km": "distance",
+      "volume": "float",
+      "cose": [{
+        "total": "float",
+        "price_per_ltr": "float"
+      }]
+    }] 
   }
 }
