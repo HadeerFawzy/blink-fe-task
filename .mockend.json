@@ -6,9 +6,6 @@
     "day": "date",
     "km": "int",
     "volume": "int",
-    "cost":{
-      "total": "int",
-      "price_per_ltr": "int"
-    }
+    "cost": "int"
   }
 }
